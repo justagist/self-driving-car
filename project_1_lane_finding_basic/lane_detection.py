@@ -39,17 +39,17 @@ def hough_lines_detection(img, rho, theta, threshold, min_line_len, max_line_gap
     return lines
 
 
-def weighted_img(img, initial_img, α=0.8, β=1., λ=0.):
+def weighted_img(img, initial_img, alpha=0.8, beta=1., lambda_=0.):
     """
     Returns resulting blend image computed as follows:
 
-    initial_img * α + img * β + λ
+    initial_img * alpha + img * beta + lambda_
     """
     img = np.uint8(img)
     if len(img.shape) is 2:
         img = np.dstack((img, np.zeros_like(img), np.zeros_like(img)))
 
-    return cv2.addWeighted(initial_img, α, img, β, λ)
+    return cv2.addWeighted(initial_img, alpha, img, beta, lambda_)
 
 
 def compute_lane_from_candidates(line_candidates, img_shape):
@@ -181,6 +181,6 @@ def color_frame_pipeline(frames, solid_lines=True, temporal_smoothing=True):
 
     # make blend on color image
     img_color = frames[-1] if is_videoclip else frames[0]
-    img_blend = weighted_img(img_masked, img_color, α=0.8, β=1., λ=0.)
+    img_blend = weighted_img(img_masked, img_color, alpha=0.8, beta=1., lambda_=0.)
 
     return img_blend

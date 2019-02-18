@@ -14,7 +14,7 @@ if __name__ == '__main__':
     if verbose:
         plt.ion()
         figManager = plt.get_current_fig_manager()
-        figManager.window.showMaximized()
+        figManager.resize(*figManager.window.maxsize())
 
     # test on images
     test_images_dir = join('data', 'test_images')
